@@ -1,8 +1,14 @@
 from django.db import models
 
 # Create your models here.
+
+#Se puede agregar metodos a las clases de los modelos, pero aun no sabria que hacer con ellos
+
 class Workspace(models.Model):
     nombre = models.CharField(max_length=255)
+    owner = models.ForeignKey('Usuario', on_delete=models.CASCADE) # Relación con Usuario, se crea entre comillas porque el modelo de usuario es creado despues de este
+    def __str__(self):
+        return self.nombre
 
 class Tarea(models.Model):
     PRIORIDAD_CHOICES = [
@@ -21,7 +27,7 @@ class Tarea(models.Model):
     def __str__(self):
         return self.nombre
     
-class Usuario(models.Model):
+class Usuario(models.Model): 
     nombre = models.CharField(max_length=255)
     apodo = models.CharField(max_length=100, unique=True)
 
